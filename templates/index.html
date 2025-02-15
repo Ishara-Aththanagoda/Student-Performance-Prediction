@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Performance Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% include 'header.html' %}
+    
+    <div class="container">
+        <h1>Student Performance Prediction</h1>
+        <form action="/predict" method="post">
+            <label for="G1">First Period Grade (G1):</label>
+            <input type="number" id="G1" name="G1" step="any" required>
+
+            <label for="G2">Second Period Grade (G2):</label>
+            <input type="number" id="G2" name="G2" step="any" required>
+
+            <label for="studytime">Study Time (hours per week):</label>
+            <input type="number" id="studytime" name="studytime" step="any" required>
+
+            <label for="failures">Number of Past Failures:</label>
+            <input type="number" id="failures" name="failures" step="any" required>
+
+            <label for="absences">Number of Absences:</label>
+            <input type="number" id="absences" name="absences" step="any" required>
+
+            <!-- Add additional input fields as required by your model -->
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction_text %}
+            <div class="result">
+                <h2>{{ prediction_text }}</h2>
+            </div>
+        {% endif %}
+    </div>
+
+    {% include 'footer.html' %}
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
